@@ -15,6 +15,7 @@
   --color-background: #101418;
   --color-primary: #88a3e8;
   
+  
   line-height: 1.5;
   background-color: theme("colors.background");
 
@@ -25,8 +26,6 @@
 }
 
 #root {
-  /* margin: 0 auto; */
-  /* padding: 2rem; */
   text-align: center;
   min-height: 100vh;
   width: 100%;
@@ -36,6 +35,5 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
-  /* min-width: 320px; */
   min-height: 100vh;
 }

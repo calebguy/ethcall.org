@@ -40,6 +40,23 @@ const api = app
 			})),
 		});
 	})
+	.get("/test", async (c) => {
+		const client = createPublicClient({
+			chain: chains[10].chain,
+			transport: http("https://optimism.llamarpc.com"),
+		});
+		const result = await client.readContract({
+			address: "0xD47B4F11Fc2be760E706C01C65248feFE51B95A0",
+			abi: parseAbi([
+				"function getEntry(uint256) public view returns ((uint256,uint256,string[],uint256,uint256,address))",
+			]),
+			functionName: "getEntry",
+			args: [BigInt(14)],
+		});
+		return c.json({
+			result: JSON.parse(stringify(result)),
+		});
+	})
 	.get("/health", (c) => c.json({ success: true }))
 	.get(
 		"/:chainId/:address/:functionSignature",
@@ -69,12 +86,15 @@ const api = app
 				abi,
 				functionName,
 			});
-			await db.createRequest({
-				chainId: BigInt(chainId),
-				address,
-				functionSignature,
-				path: c.req.path,
-			});
+			if (!c.req.header("Accept")?.includes("html")) {
+				await db.createRequest({
+					chainId: BigInt(chainId),
+					address,
+					functionSignature,
+					path: c.req.path,
+					result: JSON.parse(stringify(result)),
+				});
+			}
 			return c.json(JSON.parse(stringify(result)));
 		},
 	);
