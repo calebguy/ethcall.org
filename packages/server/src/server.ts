@@ -1,14 +1,28 @@
 import { zValidator } from "@hono/zod-validator";
+import { Db } from "db";
 import { Hono } from "hono";
 import { serveStatic } from "hono/bun";
+import { cors } from "hono/cors";
 import { createPublicClient, http, parseAbi, stringify } from "viem";
-import { mainnet, optimism } from "viem/chains";
 import { z } from "zod";
+import { chains } from "./chains";
+if (!process.env.DATABASE_URL) {
+	throw new Error("DATABASE_URL is not set");
+}
+
+if (!process.env.APP_ENV) {
+	throw new Error("APP_ENV is not set");
+}
 
 const app = new Hono();
+const db = new Db(
+	process.env.DATABASE_URL,
+	process.env.APP_ENV === "production",
+);
 
 app.use("*", serveStatic({ root: "../ui/dist" }));
 app.use("*", serveStatic({ path: "../ui/dist/index.html" }));
+app.use("*", cors());
 
 const schema = z.object({
 	chainId: z.string().transform((val) => Number(val)),
@@ -16,26 +30,17 @@ const schema = z.object({
 	functionSignature: z.string(),
 });
 
-const chains = {
-	1: {
-		rpc: [
-			"https://eth.llamarpc.com",
-			"https://virginia.rpc.blxrbdn.com",
-			"https://eth.blockrazor.xyz",
-		],
-		chain: mainnet,
-	},
-	10: {
-		rpc: [
-			"https://optimism.llamarpc.com",
-			"https://rpc.ankr.com/optimism",
-			"https://optimism.lava.build",
-		],
-		chain: optimism,
-	},
-};
-
 const api = app
+	.get("/requests", async (c) => {
+		const requests = await db.getRequests();
+		return c.json({
+			requests: requests.map((req) => ({
+				...req,
+				chainId: req.chainId.toString(),
+			})),
+		});
+	})
+	.get("/health", (c) => c.json({ success: true }))
 	.get(
 		"/:chainId/:address/:functionSignature",
 		zValidator("param", schema),
@@ -64,14 +69,21 @@ const api = app
 				abi,
 				functionName,
 			});
+			await db.createRequest({
+				chainId: BigInt(chainId),
+				address,
+				functionSignature,
+				path: c.req.path,
+			});
 			return c.json(JSON.parse(stringify(result)));
 		},
-	)
-	.get("/health", (c) => c.json({ success: true }));
+	);
 
 function convertToSolidityFunction(signature: string): string {
 	const [functionName, returnType] = signature.split("()");
-	return `function ${functionName}() public view returns (${returnType.replace("(", "").replace(")", "")})`;
+	return `function ${functionName}() public view returns (${returnType
+		.replace("(", "")
+		.replace(")", "")})`;
 }
 
 export type Api = typeof api;
