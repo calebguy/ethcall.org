@@ -1,3 +1,4 @@
+import { desc } from "drizzle-orm";
 import { drizzle as drizzleNeon } from "drizzle-orm/neon-http";
 import { drizzle } from "drizzle-orm/node-postgres";
 import { requests } from "./src/schema";
@@ -25,7 +26,11 @@ class Db {
 	}
 
 	async getRequests() {
-		return this.pg.select().from(requests).limit(25);
+		return this.pg
+			.select()
+			.from(requests)
+			.orderBy(desc(requests.createdAt))
+			.limit(50);
 	}
 }
 
