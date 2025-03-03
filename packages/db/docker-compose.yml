@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: ethcall-db
+    environment:
+      POSTGRES_USER: ethcall
+      POSTGRES_PASSWORD: ethcall
+      POSTGRES_DB: ethcall
+    ports:
+      - "5432:5432"
+    volumes:
+      - ethcall-pg-data:/var/lib/postgresql/data
+
+volumes:
+  ethcall-pg-data:

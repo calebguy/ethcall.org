@@ -2,13 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-
+@font-face {
+  font-family: "Bagnard";
+  src: url("./fonts/Bagnard.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
 :root {
-  font-family: serif;
+  font-family: "Bagnard";
+  --color-background: #101418;
+  --color-primary: #88a3e8;
+  
   line-height: 1.5;
-  font-weight: 400;
-
   background-color: theme("colors.background");
 
   font-synthesis: none;
