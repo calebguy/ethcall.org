@@ -64,6 +64,16 @@ const api = app
 		});
 	})
 	.get("/health", (c) => c.json({ success: true }))
+	.get("/chains", (c) => {
+		const data = [];
+		for (const { chain } of Object.values(chains)) {
+			data.push({
+				chainId: Number(chain.id),
+				name: chain.name,
+			});
+		}
+		return c.json(data);
+	})
 	.get(
 		"/:chainId/:address/:functionSignature",
 		zValidator("param", schema),
