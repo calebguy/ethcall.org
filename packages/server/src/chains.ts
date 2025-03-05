@@ -1,4 +1,4 @@
-import { mainnet, optimism } from "viem/chains";
+import { base, baseSepolia, mainnet, optimism } from "viem/chains";
 
 export const chains = {
 	1: {
@@ -16,5 +16,21 @@ export const chains = {
 			"https://optimism.lava.build",
 		],
 		chain: optimism,
+	},
+	84532: {
+		rpc: [
+			"https://base-sepolia.gateway.tenderly.co",
+			"https://base-sepolia-rpc.publicnode.com",
+			"https://sepolia.base.org",
+		],
+		chain: baseSepolia,
+	},
+	8453: {
+		rpc: [
+			"https://base.llamarpc.com",
+			"https://base-mainnet.public.blastapi.io",
+			"https://base-mainnet.public.blastapi.io",
+		],
+		chain: base,
 	},
 };
