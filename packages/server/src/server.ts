@@ -3,7 +3,13 @@ import { Db } from "db";
 import { Hono } from "hono";
 import { serveStatic } from "hono/bun";
 import { cors } from "hono/cors";
-import { createPublicClient, http, parseAbi, stringify } from "viem";
+import {
+	createPublicClient,
+	getAddress,
+	http,
+	parseAbi,
+	stringify,
+} from "viem";
 import { z } from "zod";
 import { chains } from "./chains";
 if (!process.env.DATABASE_URL) {
@@ -82,7 +88,7 @@ const api = app
 			const abi = parseAbi([sig]);
 			const functionName = functionSignature.split("(")[0];
 			const result = await client.readContract({
-				address: address as `0x${string}`,
+				address: getAddress(address),
 				abi,
 				functionName,
 			});
