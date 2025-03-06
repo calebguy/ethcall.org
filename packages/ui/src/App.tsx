@@ -29,7 +29,7 @@ function App() {
 								>
 									{req.path}
 								</a>
-								<div className="text-center md:text-right text-gray-500 text-lg">
+								<div className="text-center md:text-right text-gray-500 text-lg break-words">
 									{req?.result}
 								</div>
 							</div>

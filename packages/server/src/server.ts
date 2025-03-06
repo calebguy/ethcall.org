@@ -34,6 +34,7 @@ const schema = z.object({
 	chainId: z.string().transform((val) => Number(val)),
 	address: z.string(),
 	functionSignature: z.string(),
+	params: z.string().optional(),
 });
 
 const api = app
@@ -75,10 +76,11 @@ const api = app
 		return c.json(data);
 	})
 	.get(
-		"/:chainId/:address/:functionSignature",
+		"/:chainId/:address/:functionSignature/:params?",
 		zValidator("param", schema),
 		async (c) => {
-			const { chainId, address, functionSignature } = c.req.valid("param");
+			const { chainId, address, functionSignature, params } =
+				c.req.valid("param");
 			if (!Object.keys(chains).includes(chainId.toString())) {
 				return c.json(
 					{
@@ -95,13 +97,18 @@ const api = app
 				transport: http(rpcUrl),
 			});
 			const sig = convertToSolidityFunction(functionSignature);
+			const functionParams = extractParams(sig, params);
+			console.log({ sig, functionParams });
 			const abi = parseAbi([sig]);
+			console.log({ abi });
 			const functionName = functionSignature.split("(")[0];
 			const result = await client.readContract({
 				address: getAddress(address),
 				abi,
 				functionName,
+				args: functionParams.length > 0 ? functionParams : undefined,
 			});
+			console.log({ result });
 			if (!c.req.header("Accept")?.includes("html")) {
 				await db.createRequest({
 					chainId: BigInt(chainId),
@@ -115,11 +122,53 @@ const api = app
 		},
 	);
 
+/**
+ * Convert function signature into Solidity format
+ * Supports function arguments now.
+ */
 function convertToSolidityFunction(signature: string): string {
-	const [functionName, returnType] = signature.split("()");
-	return `function ${functionName}() public view returns (${returnType
-		.replace("(", "")
-		.replace(")", "")})`;
+	const functionPattern = /^(\w+)\((.*?)\)\((.*)\)$/;
+	const match = signature.match(functionPattern);
+
+	if (!match) {
+		throw new Error(`Invalid function signature format: ${signature}`);
+	}
+
+	const functionName = match[1]; // Function name
+	const inputTypes = match[2]; // Function input types
+	const returnTypes = match[3]; // Return types
+
+	// Ensure return types maintain correct parentheses
+	return `function ${functionName}(${inputTypes}) public view returns (${returnTypes})`;
+}
+
+/**
+ * Extract parameters and cast to correct types
+ */
+function extractParams(signature: string, paramsString?: string): any[] {
+	if (!paramsString) return [];
+
+	const inputTypes = signature.match(/\((.*?)\)/)?.[1]?.split(",") || [];
+
+	const params = paramsString.split(",").map((param, index) => {
+		const type = inputTypes[index]?.trim();
+
+		if (type?.startsWith("uint") || type?.startsWith("int")) {
+			return BigInt(param);
+		}
+		if (type === "bool") {
+			return param === "true";
+		}
+		if (type === "address") {
+			return getAddress(param);
+		}
+		if (type?.endsWith("[]")) {
+			return param.split(";"); // Arrays use `;` as separator
+		}
+		return param;
+	});
+
+	return params;
 }
 
 export type Api = typeof api;
