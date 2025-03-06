@@ -39,8 +39,10 @@ function App() {
 			</div>
 			<div className="fixed bottom-0 left-0 w-full p-4 flex">
 				<div className="grow mt-8 backdrop-blur-2xl text-4xl border border-primary rounded-md p-4 border-dashed flex items-center justify-center">
-					<code className="text-primary break-all text-2xl md:text-4xl grow text-center inline-block">
-						<span>curl https://ethcall.org/:chainId/:address/:fnSig</span>
+					<code className="text-primary break-all text-xl md:text-3xl grow text-center inline-block">
+						<span>
+							curl https://ethcall.org/:chainId/:address/:fnSig/(arg1,arg2...)
+						</span>
 					</code>
 				</div>
 			</div>
