@@ -118,7 +118,7 @@ const api = app
 					result: JSON.parse(stringify(result)),
 				});
 			}
-			return c.json(JSON.parse(stringify(result)));
+			return c.json({ result: JSON.parse(stringify(result)) });
 		},
 	);
 
