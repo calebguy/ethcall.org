@@ -35,10 +35,10 @@ function App() {
 								href={`${import.meta.env.VITE_API_BASE_URL}${req.path}`}
 								className="leading-8 md:leading-10 text-2xl md:text-4xl group relative w-full p-6 md:p-8 break-all"
 							>
-								<RxCornerTopLeft className="md:w-10 md:h-10 w-8 h-8 absolute top-0 left-0 text-dark-brown" />
-								<RxCornerTopRight className="md:w-10 md:h-10 w-8 h-8 absolute top-0 right-0 text-dark-brown" />
-								<RxCornerBottomLeft className="md:w-10 md:h-10 w-8 h-8 absolute bottom-0 left-0 text-dark-brown" />
-								<RxCornerBottomRight className="md:w-10 md:h-10 w-8 h-8 absolute bottom-0 right-0 text-dark-brown" />
+								<RxCornerTopLeft className="group-hover:text-magenta md:w-10 md:h-10 w-8 h-8 absolute top-0 left-0 text-dark-brown" />
+								<RxCornerTopRight className="group-hover:text-magenta md:w-10 md:h-10 w-8 h-8 absolute top-0 right-0 text-dark-brown" />
+								<RxCornerBottomLeft className="group-hover:text-magenta md:w-10 md:h-10 w-8 h-8 absolute bottom-0 left-0 text-dark-brown" />
+								<RxCornerBottomRight className="group-hover:text-magenta md:w-10 md:h-10 w-8 h-8 absolute bottom-0 right-0 text-dark-brown" />
 								<span className="group-hover:hidden inline-block">
 									<span className="font-light text-dark-brown">/{chainId}</span>
 									<span className="font-light text-dark-brown">
