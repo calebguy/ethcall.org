@@ -19,10 +19,10 @@ function App() {
 	return (
 		<div
 			className={classNames(
-				"p-6 text-center md:text-left min-h-svh max-h-svh tracking-normal flex flex-col",
+				"p-6 text-center md:text-left min-h-screen max-h-screen tracking-normal flex flex-col",
 			)}
 		>
-			<div className="flex flex-col gap-4 md:gap-8 items-start grow h-[1px] overflow-y-auto">
+			<div className="flex flex-col gap-4 md:gap-8 items-start grow overflow-y-auto">
 				{!isLoading &&
 					data?.requests?.map((req) => {
 						const [, chainId, address, fnSig, ...args] = req.path.split("/");
@@ -63,7 +63,7 @@ function App() {
 				</div>
 				{isLoading && <div>Loading...</div>}
 			</div>
-			<div className="p-4 text-center bg-opacity-50 backdrop-blur-xl text-dark-brown">
+			<div className="p-4 text-center text-dark-brown relative">
 				<span className="text-4xl md:text-7xl font-bold">ethcall.org</span>
 				<span className="text-2xl md:text-4xl font-bold break-all">
 					/:chainId/:address/:fnSig/:arg1,:arg2...
