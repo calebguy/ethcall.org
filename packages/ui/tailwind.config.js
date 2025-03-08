@@ -3,12 +3,14 @@ export default {
 	content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
 	theme: {
 		fontFamily: {
-			bagnard: ["Bagnard", "sans-serif"],
+			mono: ["DiatypeRounded", "monospace"],
 		},
 		extend: {
 			colors: {
-				background: "var(--color-background)",
-				primary: "var(--color-primary)",
+				lightBrown: "var(--color-light-brown)",
+				darkBrown: "var(--color-dark-brown)",
+				green: "var(--color-green)",
+				orange: "var(--color-orange)",
 			},
 		},
 	},

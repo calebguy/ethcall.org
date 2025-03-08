@@ -1,6 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import classNames from "classnames";
+import {
+	RxCornerBottomLeft,
+	RxCornerBottomRight,
+	RxCornerTopLeft,
+	RxCornerTopRight,
+} from "react-icons/rx";
 import { getRequests } from "./api";
+import { abbreviateAddress, splitFunctionSignature } from "./utils";
 
 function App() {
 	const { data, isLoading } = useQuery({
@@ -12,39 +19,55 @@ function App() {
 	return (
 		<div
 			className={classNames(
-				"text-6xl md:text-8xl text-primary p-6 text-center md:text-left min-h-svh relative",
+				"p-6 text-center md:text-left min-h-svh max-h-svh tracking-normal flex flex-col",
 			)}
 		>
-			<div className="">ethcall.org</div>
-			<div className="flex flex-col mt-8 gap-8 md:gap-0">
+			<div className="flex flex-col gap-4 md:gap-8 items-start grow h-[1px] overflow-y-auto">
 				{!isLoading &&
 					data?.requests?.map((req) => {
+						const [, chainId, address, fnSig, ...args] = req.path.split("/");
+						const { signature, returnType } = splitFunctionSignature(fnSig);
 						return (
-							<div key={req.id} className="leading-3">
-								<a
-									target="_blank"
-									rel="noopener noreferrer"
-									href={`${import.meta.env.VITE_API_BASE_URL}${req.path}`}
-									className="text-2xl break-words hover:underline hover:text-blue-700 text-center md:text-left"
-								>
-									{req.path}
-								</a>
-								<div className="text-center md:text-right text-gray-500 text-lg break-words">
-									{req?.result}
-								</div>
-							</div>
+							<a
+								key={req.id}
+								target="_blank"
+								rel="noopener noreferrer"
+								href={`${import.meta.env.VITE_API_BASE_URL}${req.path}`}
+								className="leading-8 md:leading-10 text-2xl md:text-4xl group relative w-full p-6 md:p-8 break-all"
+							>
+								<RxCornerTopLeft className="md:w-10 md:h-10 w-8 h-8 absolute top-0 left-0 text-dark-brown" />
+								<RxCornerTopRight className="md:w-10 md:h-10 w-8 h-8 absolute top-0 right-0 text-dark-brown" />
+								<RxCornerBottomLeft className="md:w-10 md:h-10 w-8 h-8 absolute bottom-0 left-0 text-dark-brown" />
+								<RxCornerBottomRight className="md:w-10 md:h-10 w-8 h-8 absolute bottom-0 right-0 text-dark-brown" />
+								<span className="group-hover:hidden inline-block">
+									<span className="font-light text-dark-brown">/{chainId}</span>
+									<span className="font-light text-dark-brown">
+										/{abbreviateAddress(address)}
+									</span>
+									<span className="font-bold text-orange">/{signature}</span>
+									<span className="font-bold text-green">{returnType}</span>
+									{args.length > 0 && (
+										<span className="text-white font-bold">
+											/{args.join(",")}
+										</span>
+									)}
+								</span>
+								<span className="group-hover:inline-block hidden break-all text-magenta">
+									{req.result}
+								</span>
+							</a>
 						);
 					})}
+				<div className="text-dark-brown text-center w-full">
+					~ eth_call me ~
+				</div>
 				{isLoading && <div>Loading...</div>}
 			</div>
-			<div className="fixed bottom-0 left-0 w-full p-4 flex">
-				<div className="grow mt-8 backdrop-blur-2xl text-4xl border border-primary rounded-md p-4 border-dashed flex items-center justify-center">
-					<code className="text-primary break-all text-xl md:text-3xl grow text-center inline-block">
-						<span>
-							curl https://ethcall.org/:chainId/:address/:fnSig/(arg1,arg2...)
-						</span>
-					</code>
-				</div>
+			<div className="p-4 text-center bg-opacity-50 backdrop-blur-xl text-dark-brown">
+				<span className="text-4xl md:text-7xl font-bold">ethcall.org</span>
+				<span className="text-2xl md:text-4xl font-bold break-all">
+					/:chainId/:address/:fnSig/:arg1,:arg2...
+				</span>
 			</div>
 		</div>
 	);
