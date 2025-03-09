@@ -22,7 +22,7 @@ function App() {
 				"p-6 text-center md:text-left min-h-screen max-h-screen tracking-normal flex flex-col",
 			)}
 		>
-			<div className="flex flex-col gap-4 md:gap-8 items-start grow overflow-y-auto">
+			<div className="flex flex-col gap-4 items-start grow overflow-y-auto">
 				{!isLoading &&
 					data?.requests?.map((req) => {
 						const [, chainId, address, fnSig, ...args] = req.path.split("/");
@@ -39,7 +39,7 @@ function App() {
 								<RxCornerTopRight className="group-hover:text-magenta md:w-10 md:h-10 w-8 h-8 absolute top-0 right-0 text-dark-brown" />
 								<RxCornerBottomLeft className="group-hover:text-magenta md:w-10 md:h-10 w-8 h-8 absolute bottom-0 left-0 text-dark-brown" />
 								<RxCornerBottomRight className="group-hover:text-magenta md:w-10 md:h-10 w-8 h-8 absolute bottom-0 right-0 text-dark-brown" />
-								<span className="group-hover:hidden inline-block">
+								<span className="group-hover:opacity-0 inline-block">
 									<span className="font-light text-dark-brown">/{chainId}</span>
 									<span className="font-light text-dark-brown">
 										/{abbreviateAddress(address)}
@@ -52,8 +52,8 @@ function App() {
 										</span>
 									)}
 								</span>
-								<span className="group-hover:inline-block hidden break-all text-magenta">
-									{req.result}
+								<span className="hidden break-all text-magenta absolute top-0 left-8 mx-auto group-hover:flex items-center justify-start w-full h-full text-4xl overflow-auto tracking-tighter">
+									<span>{req.result}</span>
 								</span>
 							</a>
 						);
