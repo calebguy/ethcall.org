@@ -45,15 +45,19 @@ export function Home() {
 										/{abbreviateAddress(address)}
 									</span>
 									<span className="font-bold text-orange">/{signature}</span>
-									<span className="font-bold text-green">{returnType}</span>
+									<span className="font-bold text-green italic">
+										{returnType}
+									</span>
 									{args.length > 0 && (
-										<span className="text-white font-bold">
+										<span className="text-white font-medium">
 											/{args.join(",")}
 										</span>
 									)}
 								</span>
-								<span className="hidden break-all text-magenta absolute top-0 left-8 group-hover:flex items-center justify-start w-full h-full  md:text-4xl text-overflow-ellipsis overflow-hidden tracking-tighter">
-									<span className="text-wrap">{req.result}</span>
+								<span className="hidden break-all text-magenta absolute top-0 left-0 p-8 group-hover:flex items-center justify-start w-full h-full  md:text-4xl text-overflow-ellipsis overflow-hidden tracking-tighter">
+									<span className="text-wrap overflow-hidden">
+										{req.result}
+									</span>
 								</span>
 							</a>
 						);
