@@ -66,7 +66,7 @@ function App() {
 				</div>
 				{isLoading && <div>Loading...</div>}
 			</div>
-			<div className="p-4 text-center text-dark-brown relative">
+			<div className="absolute bottom-4 left-4 text-center text-dark-brown backdrop-blur-xs rounded-xl p-4 shadow-dark-brown/20">
 				<span className="text-4xl md:text-7xl font-bold">ethcall.org</span>
 				<span className="text-2xl md:text-4xl font-bold break-all">
 					/:chainId/:address/:fnSig/:arg1,:arg2...
