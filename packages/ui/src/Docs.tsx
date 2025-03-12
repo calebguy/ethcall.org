@@ -14,7 +14,7 @@ export function Docs() {
 				<RxCornerBottomLeft className="group-hover:text-magenta md:w-10 md:h-10 w-8 h-8 absolute -bottom-[10px] -left-[10px] text-dark-brown" />
 				<RxCornerBottomRight className="group-hover:text-magenta md:w-10 md:h-10 w-8 h-8 absolute -bottom-[10px] -right-[10px] text-dark-brown" />
 				<div className="flex flex-col items-center md:items-start gap-2 break-words overflow-auto text-wrap">
-					<span className="bg-dark-brown p-2 rounded-xl text-white">GET</span>
+					<span className="bg-dark-brown p-2 rounded-xl text-magenta">GET</span>
 					<div
 						style={{ overflowWrap: "anywhere" }}
 						className="overflow-auto text-wrap break-words"
@@ -31,7 +31,9 @@ export function Docs() {
 					</div>
 				</div>
 				<div className="mt-14 flex flex-col items-center md:items-start gap-4">
-					<span className="bg-dark-brown p-2 rounded-xl italic">RETURNS</span>
+					<span className="bg-dark-brown p-2 rounded-xl italic text-light-brown">
+						RETURNS
+					</span>
 					<div className="text-white italic">
 						<span>{"{"}</span>
 						<span>result:</span>
@@ -46,7 +48,7 @@ export function Docs() {
 				<RxCornerBottomLeft className="group-hover:text-magenta md:w-10 md:h-10 w-8 h-8 absolute -bottom-[10px] -left-[10px] text-dark-brown" />
 				<RxCornerBottomRight className="group-hover:text-magenta md:w-10 md:h-10 w-8 h-8 absolute -bottom-[10px] -right-[10px] text-dark-brown" />
 				<div className="flex flex-col items-center md:items-start gap-2 break-words overflow-auto text-wrap">
-					<span className="bg-dark-brown text-white p-2 rounded-xl">GET</span>
+					<span className="bg-dark-brown text-magenta p-2 rounded-xl">GET</span>
 					<div
 						style={{ overflowWrap: "anywhere" }}
 						className="overflow-auto text-wrap break-words"
@@ -56,7 +58,7 @@ export function Docs() {
 					</div>
 				</div>
 				<div className="mt-14 flex flex-col items-center md:items-start gap-4">
-					<span className="bg-dark-brown p-2 rounded-xl text-magenta italic">
+					<span className="bg-dark-brown p-2 rounded-xl text-light-brown italic">
 						RETURNS
 					</span>
 					<div
