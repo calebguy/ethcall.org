@@ -37,7 +37,7 @@ export function Docs() {
 					<div className="text-white italic">
 						<span>{"{"}</span>
 						<span>result:</span>
-						<span>"string | object"</span>
+						<span>"string | array"</span>
 						<span>{"}"}</span>
 					</div>
 				</div>
