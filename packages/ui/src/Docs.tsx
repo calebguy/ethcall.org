@@ -57,7 +57,7 @@ export function Docs() {
 						className="overflow-auto text-wrap break-words"
 					>
 						<span className="text-dark-brown">https://ethcall.org</span>
-						<span className="text-orange">/chains</span>
+						<span className="text-dark-brown">/chains</span>
 					</div>
 				</div>
 				<div className="mt-14 flex flex-col items-center md:items-start gap-4">
