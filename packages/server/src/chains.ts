@@ -1,6 +1,24 @@
-import { base, baseSepolia, mainnet, optimism } from "viem/chains";
+import {
+	arbitrum,
+	arbitrumNova,
+	arbitrumSepolia,
+	base,
+	baseSepolia,
+	holesky,
+	mainnet,
+	optimism,
+	optimismSepolia,
+} from "viem/chains";
 
 export const chains = {
+	17000: {
+		rpc: [
+			"https://holesky.gateway.tenderly.co",
+			"https://holesky.drpc.org",
+			"https://1rpc.io/holesky",
+		],
+		chain: holesky,
+	},
 	1: {
 		rpc: [
 			"https://eth.llamarpc.com",
@@ -8,6 +26,14 @@ export const chains = {
 			"https://eth.blockrazor.xyz",
 		],
 		chain: mainnet,
+	},
+	11155420: {
+		rpc: [
+			"https://sepolia.optimism.io",
+			"https://endpoints.omniatech.io/v1/op/sepolia/public",
+			"https://api.zan.top/opt-sepolia",
+		],
+		chain: optimismSepolia,
 	},
 	10: {
 		rpc: [
@@ -32,5 +58,29 @@ export const chains = {
 			"https://base-mainnet.public.blastapi.io",
 		],
 		chain: base,
+	},
+	421614: {
+		rpc: [
+			"https://arbitrum-sepolia-rpc.publicnode.com",
+			"https://api.zan.top/arb-sepolia",
+			"https://arbitrum-sepolia.gateway.tenderly.co",
+		],
+		chain: arbitrumSepolia,
+	},
+	42161: {
+		rpc: [
+			"https://arbitrum.llamarpc.com",
+			"https://endpoints.omniatech.io/v1/arbitrum/one/public",
+			"https://arb-pokt.nodies.app",
+		],
+		chain: arbitrum,
+	},
+	42170: {
+		rpc: [
+			"https://docs-demo.nova-mainnet.quiknode.pro",
+			"https://arbitrum-nova.gateway.tenderly.co",
+			"https://nova.arbitrum.io/rpc",
+		],
+		chain: arbitrumNova,
 	},
 };
