@@ -72,7 +72,7 @@ export function Docs() {
 					</div>
 				</div>
 			</section>
-			<footer className="flex items-center justify-center gap-4">
+			<footer className="flex items-end justify-center gap-4 grow">
 				<Link
 					target="_blank"
 					rel="noopener noreferrer"
