@@ -6,6 +6,7 @@ import {
 	RxCornerTopLeft,
 	RxCornerTopRight,
 } from "react-icons/rx";
+import { Link } from "react-router-dom";
 import { getRequests } from "./api";
 import { abbreviateAddress, splitFunctionSignature } from "./utils";
 
@@ -22,7 +23,7 @@ export function Home() {
 				"p-6 text-center md:text-left min-h-dvw tracking-normal flex flex-col",
 			)}
 		>
-			<div className="flex flex-col gap-4 items-start grow px-2 py-2">
+			<div className="flex flex-col gap-4 items-start grow px-2 py-2 order-last md:order-first">
 				{!isLoading &&
 					data?.requests?.map((req) => {
 						const [, chainId, address, fnSig, ...args] = req.path.split("/");
@@ -67,11 +68,22 @@ export function Home() {
 				</div>
 				{isLoading && <div>Loading...</div>}
 			</div>
-			<div className="fixed min-w-dvw bottom-0 left-0 text-center text-dark-brown backdrop-blur-[1px] p-4 shadow-dark-brown/20">
-				<span className="text-4xl md:text-7xl font-bold">ethcall.org</span>
-				<span className="text-2xl md:text-4xl font-bold break-all">
-					/:chainId/:address/:fnSig/:arg1,:arg2...
+			<div className="group order-first md:order-last md:fixed bottom-0 left-0 text-dark-brown backdrop-blur-[1.5px] p-4 text-center md:text-left w-full">
+				<span className="md:group-hover:hidden text-4xl md:text-7xl font-bold break-all">
+					ethcall.org
 				</span>
+				<span className="md:group-hover:hidden md:block text-2xl md:text-4xl font-bold break-all hidden md:visible">
+					/:chainId/:address/:fnSig/:arg...
+				</span>
+				<Link
+					to="/docs"
+					className="block md:hidden md:group-hover:block md:text-magenta text-dark-brown hover:italic hover:text-magenta mt-4 text-2xl md:text-7xl md:italic md:uppercase text-center md:text-left "
+				>
+					docs
+					<span className="hidden md:inline-block">
+						{"->->->->->->->->->->"}
+					</span>
+				</Link>
 			</div>
 		</div>
 	);

@@ -17,7 +17,7 @@ export function Docs() {
 					<span className="bg-dark-brown p-2 rounded-xl text-magenta">GET</span>
 					<div
 						style={{ overflowWrap: "anywhere" }}
-						className="overflow-auto text-wrap break-words"
+						className="overflow-auto text-wrap break-words text-center md:text-left"
 					>
 						<span className="text-dark-brown">
 							https://ethcall.org/:chainId/:address
