@@ -79,7 +79,7 @@ export function Docs() {
 					to="https://github.com/calebguy/ethcall.org"
 					className="hover:text-magenta text-dark-brown"
 				>
-					<FaGithub className="w-8 h-8" />
+					<FaGithub className="md:w-8 md:h-8 w-6 h-6" />
 				</Link>
 				<Link
 					target="_blank"
@@ -87,7 +87,7 @@ export function Docs() {
 					to="https://x.com/caleb__guy"
 					className="hover:text-magenta text-dark-brown"
 				>
-					<FaXTwitter className="w-8 h-8" />
+					<FaXTwitter className="md:w-8 md:h-8 w-6 h-6" />
 				</Link>
 			</footer>
 		</div>

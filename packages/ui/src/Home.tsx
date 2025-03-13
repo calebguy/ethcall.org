@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import classNames from "classnames";
+import { FaGithub, FaXTwitter } from "react-icons/fa6";
 import {
 	RxCornerBottomLeft,
 	RxCornerBottomRight,
@@ -63,13 +64,11 @@ export function Home() {
 							</a>
 						);
 					})}
-				{!isLoading && (
-					<div className="text-dark-brown text-center w-full">
-						~ eth_call me ~
-					</div>
-				)}
 				{isLoading && (
-					<div className="w-full h-full grow flex items-center justify-center relative">
+					<div
+						className="w-full h-full grow flex items-center justify-center relative
+					"
+					>
 						<span className="text-4xl animate-spin">☎️</span>
 						<RxCornerTopLeft className="md:w-10 md:h-10 w-8 h-8 absolute -top-[10px] -left-[10px] text-dark-brown" />
 						<RxCornerTopRight className="md:w-10 md:h-10 w-8 h-8 absolute -top-[10px] -right-[10px] text-dark-brown" />
@@ -95,6 +94,24 @@ export function Home() {
 					</span>
 				</Link>
 			</div>
+			<footer className="order-last md:hidden flex items-center justify-center gap-4">
+				<Link
+					target="_blank"
+					rel="noopener noreferrer"
+					to="https://github.com/calebguy/ethcall.org"
+					className="hover:text-magenta text-dark-brown"
+				>
+					<FaGithub className="md:w-8 md:h-8 w-6 h-6" />
+				</Link>
+				<Link
+					target="_blank"
+					rel="noopener noreferrer"
+					to="https://x.com/caleb__guy"
+					className="hover:text-magenta text-dark-brown"
+				>
+					<FaXTwitter className="md:w-8 md:h-8 w-6 h-6" />
+				</Link>
+			</footer>
 		</div>
 	);
 }
