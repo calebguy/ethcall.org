@@ -20,7 +20,7 @@ export function Home() {
 	return (
 		<div
 			className={classNames(
-				"p-6 text-center md:text-left min-h-dvw tracking-normal flex flex-col",
+				"p-6 text-center md:text-left tracking-normal flex flex-col grow",
 			)}
 		>
 			<div className="flex flex-col gap-4 items-start grow px-2 py-2 order-last md:order-first">
@@ -63,10 +63,20 @@ export function Home() {
 							</a>
 						);
 					})}
-				<div className="text-dark-brown text-center w-full">
-					~ eth_call me ~
-				</div>
-				{isLoading && <div>Loading...</div>}
+				{!isLoading && (
+					<div className="text-dark-brown text-center w-full">
+						~ eth_call me ~
+					</div>
+				)}
+				{isLoading && (
+					<div className="w-full h-full grow flex items-center justify-center relative">
+						<span className="text-4xl animate-spin">☎️</span>
+						<RxCornerTopLeft className="md:w-10 md:h-10 w-8 h-8 absolute -top-[10px] -left-[10px] text-dark-brown" />
+						<RxCornerTopRight className="md:w-10 md:h-10 w-8 h-8 absolute -top-[10px] -right-[10px] text-dark-brown" />
+						<RxCornerBottomLeft className="md:w-10 md:h-10 w-8 h-8 absolute -bottom-[10px] -left-[10px] text-dark-brown" />
+						<RxCornerBottomRight className="md:w-10 md:h-10 w-8 h-8 absolute -bottom-[10px] -right-[10px] text-dark-brown" />
+					</div>
+				)}
 			</div>
 			<div className="group order-first md:order-last md:fixed bottom-0 left-0 text-dark-brown backdrop-blur-[1.5px] p-4 text-center md:text-left w-full">
 				<span className="md:group-hover:hidden text-4xl md:text-7xl font-bold break-all">
