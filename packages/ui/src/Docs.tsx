@@ -1,9 +1,12 @@
+import { FaGithub } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import {
 	RxCornerBottomLeft,
 	RxCornerBottomRight,
 	RxCornerTopLeft,
 	RxCornerTopRight,
 } from "react-icons/rx";
+import { Link } from "react-router-dom";
 
 export function Docs() {
 	return (
@@ -69,6 +72,24 @@ export function Docs() {
 					</div>
 				</div>
 			</section>
+			<footer className="flex items-center justify-center gap-4">
+				<Link
+					target="_blank"
+					rel="noopener noreferrer"
+					to="https://github.com/calebguy/ethcall.org"
+					className="hover:text-magenta text-dark-brown"
+				>
+					<FaGithub className="w-8 h-8" />
+				</Link>
+				<Link
+					target="_blank"
+					rel="noopener noreferrer"
+					to="https://x.com/caleb__guy"
+					className="hover:text-magenta text-dark-brown"
+				>
+					<FaXTwitter className="w-8 h-8" />
+				</Link>
+			</footer>
 		</div>
 	);
 }
