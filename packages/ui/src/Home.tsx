@@ -69,7 +69,7 @@ export function Home() {
 						className="w-full h-full grow flex items-center justify-center relative
 					"
 					>
-						<span className="text-4xl animate-spin">☎️</span>
+						<span className="text-xl text-dark-brown">...</span>
 						<RxCornerTopLeft className="md:w-10 md:h-10 w-8 h-8 absolute -top-[10px] -left-[10px] text-dark-brown" />
 						<RxCornerTopRight className="md:w-10 md:h-10 w-8 h-8 absolute -top-[10px] -right-[10px] text-dark-brown" />
 						<RxCornerBottomLeft className="md:w-10 md:h-10 w-8 h-8 absolute -bottom-[10px] -left-[10px] text-dark-brown" />
