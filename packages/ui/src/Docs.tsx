@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 export function Docs() {
 	return (
-		<div className="p-6 text-2xl md:text-4xl flex flex-col gap-14 min-h-dvh">
+		<div className="p-6 text-2xl md:text-4xl flex flex-col grow gap-14">
 			<section className="text-magenta relative p-6 md:p-8">
 				<RxCornerTopLeft className="group-hover:text-magenta md:w-10 md:h-10 w-8 h-8 absolute -top-[10px] -left-[10px] text-dark-brown" />
 				<RxCornerTopRight className="group-hover:text-magenta md:w-10 md:h-10 w-8 h-8 absolute -top-[10px] -right-[10px] text-dark-brown" />
@@ -72,7 +72,7 @@ export function Docs() {
 					</div>
 				</div>
 			</section>
-			<footer className="flex items-en justify-center gap-4 grow">
+			<footer className="flex items-end justify-center gap-4 grow">
 				<Link
 					target="_blank"
 					rel="noopener noreferrer"
