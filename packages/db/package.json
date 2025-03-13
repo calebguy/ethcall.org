@@ -12,8 +12,7 @@
   "dependencies": {
     "@neondatabase/serverless": "^0.10.4",
     "drizzle-orm": "^0.40.0",
-    "pg": "^8.13.3",
-    "db": "workspace:*"
+    "pg": "^8.13.3"
   },
   "scripts": {
     "dev": "./dev.sh",

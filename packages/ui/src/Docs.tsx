@@ -31,7 +31,7 @@ export function Docs() {
 					</div>
 				</div>
 				<div className="mt-14 flex flex-col items-center md:items-start gap-4">
-					<span className="bg-dark-brown p-2 rounded-xl italic text-light-brown">
+					<span className="bg-dark-brown p-2 rounded-xl italic text-magenta">
 						RETURNS
 					</span>
 					<div className="text-white italic">
@@ -58,7 +58,7 @@ export function Docs() {
 					</div>
 				</div>
 				<div className="mt-14 flex flex-col items-center md:items-start gap-4">
-					<span className="bg-dark-brown p-2 rounded-xl text-light-brown italic">
+					<span className="bg-dark-brown p-2 rounded-xl text-magenta italic">
 						RETURNS
 					</span>
 					<div

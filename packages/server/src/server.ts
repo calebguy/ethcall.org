@@ -29,6 +29,7 @@ const db = new Db(
 app.use("*", serveStatic({ root: "../ui/dist" }));
 app.use("*", serveStatic({ path: "../ui/dist/index.html" }));
 app.use("*", cors());
+app.notFound((c) => c.html(Bun.file("../ui/dist/index.html").text()));
 
 const schema = z.object({
 	chainId: z.string().transform((val) => Number(val)),
@@ -38,6 +39,7 @@ const schema = z.object({
 });
 
 const api = app
+	.get("/docs", serveStatic({ path: "../ui/dist/index.html" }))
 	.get("/requests", async (c) => {
 		const requests = await db.getRequests();
 		return c.json({
@@ -98,9 +100,7 @@ const api = app
 			});
 			const sig = convertToSolidityFunction(functionSignature);
 			const functionParams = extractParams(sig, params);
-			console.log({ sig, functionParams });
 			const abi = parseAbi([sig]);
-			console.log({ abi });
 			const functionName = functionSignature.split("(")[0];
 			const result = await client.readContract({
 				address: getAddress(address),
@@ -108,7 +108,7 @@ const api = app
 				functionName,
 				args: functionParams.length > 0 ? functionParams : undefined,
 			});
-			console.log({ result });
+
 			if (!c.req.header("Accept")?.includes("html")) {
 				await db.createRequest({
 					chainId: BigInt(chainId),
@@ -145,7 +145,7 @@ function convertToSolidityFunction(signature: string): string {
 /**
  * Extract parameters and cast to correct types
  */
-function extractParams(signature: string, paramsString?: string): any[] {
+function extractParams(signature: string, paramsString?: string) {
 	if (!paramsString) return [];
 
 	const inputTypes = signature.match(/\((.*?)\)/)?.[1]?.split(",") || [];

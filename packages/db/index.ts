@@ -6,13 +6,10 @@ import { requests } from "./src/schema";
 class Db {
 	private pg;
 
-	constructor(
-		private readonly connectionUrl: string,
-		isNeon: boolean,
-	) {
+	constructor(connectionUrl: string, isNeon: boolean) {
 		const params = {
 			casing: "snake_case",
-			connection: this.connectionUrl,
+			connection: connectionUrl,
 			schema: {
 				requests,
 			},
