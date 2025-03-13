@@ -40,7 +40,7 @@ export function Docs() {
 					<div className="text-white italic">
 						<span>{"{"}</span>
 						<span>result:</span>
-						<span>"string | array"</span>
+						<span>"string | {"Array<string | Array<string>>"}"</span>
 						<span>{"}"}</span>
 					</div>
 				</div>
