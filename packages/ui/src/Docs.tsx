@@ -27,7 +27,7 @@ export function Docs() {
 						</span>
 						<span className="text-orange">/:fnSig</span>
 						<span className="text-orange">{"("}</span>
-						<span className="text-orange/60">arg1,arg2,...</span>
+						<span className="text-orange">arg1,arg2,...</span>
 						<span className="text-orange">{")"}</span>
 						<span className="text-green">(returnType...)</span>
 						<span className="text-white">/:arg1,:arg2...</span>
@@ -72,7 +72,7 @@ export function Docs() {
 					</div>
 				</div>
 			</section>
-			<footer className="flex items-end justify-center gap-4 grow">
+			<footer className="flex items-en justify-center gap-4 grow">
 				<Link
 					target="_blank"
 					rel="noopener noreferrer"
