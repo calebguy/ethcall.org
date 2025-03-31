@@ -58,7 +58,8 @@ export function Home() {
 								</span>
 								<span className="hidden break-all text-magenta absolute top-0 left-0 p-8 group-hover:flex items-center justify-start w-full h-full  md:text-4xl text-overflow-ellipsis overflow-hidden tracking-tighter">
 									<span className="text-wrap overflow-hidden">
-										{req.result.toString()}
+										{/* @ts-ignore */}
+										{req.result?.toString()}
 									</span>
 								</span>
 							</a>
