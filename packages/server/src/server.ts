@@ -5,9 +5,11 @@ import { serveStatic } from "hono/bun";
 import { cors } from "hono/cors";
 import {
 	createPublicClient,
+	formatEther,
 	getAddress,
 	http,
 	parseAbi,
+	parseEther,
 	stringify,
 } from "viem";
 import { z } from "zod";
@@ -76,6 +78,36 @@ const api = app
 			});
 		}
 		return c.json(data);
+	})
+	.get("/wei2eth/:value", (c) => {
+		const { value } = c.req.param();
+		let formattedValue: string;
+		try {
+			formattedValue = formatEther(BigInt(value));
+		} catch (error) {
+			return c.json(
+				{
+					error: "Invalid value",
+				},
+				400,
+			);
+		}
+		return c.json({ value: formattedValue });
+	})
+	.get("/eth2wei/:value", (c) => {
+		const { value } = c.req.param();
+		let weiValue: bigint;
+		try {
+			weiValue = parseEther(value);
+		} catch (error) {
+			return c.json(
+				{
+					error: "Invalid value",
+				},
+				400,
+			);
+		}
+		return c.json({ value: weiValue.toString() });
 	})
 	.get(
 		"/:chainId/:address/:functionSignature/:params?",
