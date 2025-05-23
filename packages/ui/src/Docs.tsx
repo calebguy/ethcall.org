@@ -34,7 +34,7 @@ export function Docs() {
 					</div>
 				</div>
 				<div className="mt-14 flex flex-col items-center md:items-start gap-4">
-				<span className="bg-dark-brown p-2 rounded-xl italic text-magenta">
+					<span className="bg-dark-brown p-2 rounded-xl italic text-magenta">
 						RETURNS
 					</span>
 					<div className="text-white italic">
@@ -45,33 +45,29 @@ export function Docs() {
 					</div>
 				</div>
 			</section>
-			<section className="relative p-6 md:p-8">
-				<RxCornerTopLeft className="group-hover:text-magenta md:w-10 md:h-10 w-8 h-8 absolute -top-[10px] -left-[10px] text-dark-brown" />
-				<RxCornerTopRight className="group-hover:text-magenta md:w-10 md:h-10 w-8 h-8 absolute -top-[10px] -right-[10px] text-dark-brown" />
-				<RxCornerBottomLeft className="group-hover:text-magenta md:w-10 md:h-10 w-8 h-8 absolute -bottom-[10px] -left-[10px] text-dark-brown" />
-				<RxCornerBottomRight className="group-hover:text-magenta md:w-10 md:h-10 w-8 h-8 absolute -bottom-[10px] -right-[10px] text-dark-brown" />
-				<div className="flex flex-col items-center md:items-start gap-2 break-words overflow-auto text-wrap">
-					<span className="bg-dark-brown text-magenta p-2 rounded-xl">GET</span>
-					<div
-						style={{ overflowWrap: "anywhere" }}
-						className="overflow-auto text-wrap break-words"
-					>
-						<span className="text-dark-brown">https://ethcall.org</span>
-						<span className="text-dark-brown">/chains</span>
-					</div>
-				</div>
-				<div className="mt-14 flex flex-col items-center md:items-start gap-4">
-					<span className="bg-dark-brown p-2 rounded-xl text-magenta italic">
-						RETURNS
-					</span>
-					<div
-						style={{ overflowWrap: "anywhere" }}
-						className="text-white italic overflow-auto text-wrap break-words"
-					>
-						{JSON.stringify({ chainId: "number", chainName: "string" })}[]
-					</div>
-				</div>
-			</section>
+			<Section
+				method="GET"
+				url="https://ethcall.org/:chainId/:address/balance"
+				returns={JSON.stringify({ result: "string" })}
+			/>
+			<Section
+				method="GET"
+				url="https://ethcall.org/wei2eth/:value"
+				returns={JSON.stringify({ result: "string" })}
+			/>
+			<Section
+				method="GET"
+				url="https://ethcall.org/eth2wei/:value"
+				returns={JSON.stringify({ result: "string" })}
+			/>
+			<Section
+				method="GET"
+				url="https://ethcall.org/chains"
+				returns={`Array<${JSON.stringify({
+					chainId: "number",
+					chainName: "string",
+				})}>`}
+			/>
 			<footer className="flex items-end justify-center gap-4 grow">
 				<Link
 					target="_blank"
@@ -91,5 +87,42 @@ export function Docs() {
 				</Link>
 			</footer>
 		</div>
+	);
+}
+
+function Section({
+	method,
+	url,
+	returns,
+}: { method: string; url: string; returns: string }) {
+	return (
+		<section className="relative p-6 md:p-8">
+			<RxCornerTopLeft className="group-hover:text-magenta md:w-10 md:h-10 w-8 h-8 absolute -top-[10px] -left-[10px] text-dark-brown" />
+			<RxCornerTopRight className="group-hover:text-magenta md:w-10 md:h-10 w-8 h-8 absolute -top-[10px] -right-[10px] text-dark-brown" />
+			<RxCornerBottomLeft className="group-hover:text-magenta md:w-10 md:h-10 w-8 h-8 absolute -bottom-[10px] -left-[10px] text-dark-brown" />
+			<RxCornerBottomRight className="group-hover:text-magenta md:w-10 md:h-10 w-8 h-8 absolute -bottom-[10px] -right-[10px] text-dark-brown" />
+			<div className="flex flex-col items-center md:items-start gap-2 break-words overflow-auto text-wrap">
+				<span className="bg-dark-brown text-magenta p-2 rounded-xl">
+					{method}
+				</span>
+				<div
+					style={{ overflowWrap: "anywhere" }}
+					className="overflow-auto text-wrap break-words"
+				>
+					<span className="text-dark-brown">{url}</span>
+				</div>
+			</div>
+			<div className="mt-14 flex flex-col items-center md:items-start gap-4">
+				<span className="bg-dark-brown p-2 rounded-xl text-magenta italic">
+					RETURNS
+				</span>
+				<div
+					style={{ overflowWrap: "anywhere" }}
+					className="text-white italic overflow-auto text-wrap break-words"
+				>
+					{returns}
+				</div>
+			</div>
+		</section>
 	);
 }
