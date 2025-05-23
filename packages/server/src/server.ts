@@ -73,7 +73,7 @@ const api = app
 				400,
 			);
 		}
-		return c.json({ value: formattedValue });
+		return c.json({ result: formattedValue });
 	})
 	.get("/eth2wei/:value", (c) => {
 		const { value } = c.req.param();
@@ -88,7 +88,7 @@ const api = app
 				400,
 			);
 		}
-		return c.json({ value: weiValue.toString() });
+		return c.json({ result: weiValue.toString() });
 	})
 	.get(
 		"/:chainId/:address/balance",
@@ -100,7 +100,7 @@ const api = app
 				const balance = await client.getBalance({
 					address: getAddress(address),
 				});
-				return c.json({ balance: formatEther(balance) });
+				return c.json({ result: formatEther(balance) });
 			} catch (e) {
 				if (e instanceof InvalidChainError) {
 					return c.json({ error: e.message }, 400);
