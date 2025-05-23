@@ -1,3 +1,4 @@
+import { createPublicClient, http } from "viem";
 import {
 	arbitrum,
 	arbitrumNova,
@@ -84,3 +85,22 @@ export const chains = {
 		chain: arbitrumNova,
 	},
 };
+
+export class InvalidChainError extends Error {
+	constructor(chainId: number) {
+		super(`Chain ${chainId} not found`);
+	}
+}
+
+export function getClient(chainId: number) {
+	const chain = chains[chainId as keyof typeof chains];
+	if (!chain) {
+		throw new InvalidChainError(chainId);
+	}
+	const rpcs = chain.rpc;
+	const rpcUrl = rpcs[Math.floor(Math.random() * rpcs.length)];
+	return createPublicClient({
+		chain: chain.chain,
+		transport: http(rpcUrl),
+	});
+}
