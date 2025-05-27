@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import { FaGithub } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import {
@@ -17,24 +18,26 @@ export function Docs() {
 				<RxCornerBottomLeft className="group-hover:text-magenta md:w-10 md:h-10 w-8 h-8 absolute -bottom-[10px] -left-[10px] text-dark-brown" />
 				<RxCornerBottomRight className="group-hover:text-magenta md:w-10 md:h-10 w-8 h-8 absolute -bottom-[10px] -right-[10px] text-dark-brown" />
 				<div className="flex flex-col items-center md:items-start gap-2 break-words overflow-auto text-wrap">
-					<span className="bg-dark-brown p-2 rounded-xl text-magenta">GET</span>
+					<span className="bg-dark-brown p-2 rounded-xl text-magenta leading-10 pt-2.5 px-3">
+						GET
+					</span>
 					<div
 						style={{ overflowWrap: "anywhere" }}
 						className="overflow-auto text-wrap break-words text-center md:text-left"
 					>
-						<span className="text-dark-brown">
-							https://ethcall.org/:chainId/:address
-						</span>
-						<span className="text-orange">/:fnSig</span>
-						<span className="text-orange">{"("}</span>
-						<span className="text-orange">arg1,arg2,...</span>
-						<span className="text-orange">{")"}</span>
-						<span className="text-green">(returnType...)</span>
-						<span className="text-white">/:arg1,:arg2...</span>
+						<span className="text-dark-brown">https://ethcall.org/</span>
+						<span className="font-bold">:chainId</span>
+						<span className="text-cyan-300 font-bold">/:address</span>
+						<span className="text-orange font-bold">/:fnSig</span>
+						<span className="text-orange font-bold">{"("}</span>
+						<span className="text-orange font-bold">arg1,arg2,...</span>
+						<span className="text-orange font-bold">{")"}</span>
+						<span className="text-green font-bold">(returnType...)</span>
+						<span className="text-white font-bold">/:arg1,:arg2...</span>
 					</div>
 				</div>
 				<div className="mt-14 flex flex-col items-center md:items-start gap-4">
-					<span className="bg-dark-brown p-2 rounded-xl italic text-magenta">
+					<span className="bg-dark-brown p-2 rounded-xl italic text-magenta leading-10 pt-2.5 px-3">
 						RETURNS
 					</span>
 					<div className="text-white italic">
@@ -47,22 +50,38 @@ export function Docs() {
 			</section>
 			<Section
 				method="GET"
-				url="https://ethcall.org/:chainId/:address/balance"
+				path={
+					<span>
+						<span className="text-magenta font-bold">:chainId</span>
+						<span className="text-cyan-300 font-bold">/:address</span>
+						<span className="text-dark-brown font-bold">/balance</span>
+					</span>
+				}
 				returns={JSON.stringify({ result: "string" })}
 			/>
 			<Section
 				method="GET"
-				url="https://ethcall.org/wei2eth/:value"
+				path={
+					<span>
+						<span className="text-dark-brown font-bold">wei2eth</span>
+						<span className="text-white font-bold">/:value</span>
+					</span>
+				}
 				returns={JSON.stringify({ result: "string" })}
 			/>
 			<Section
 				method="GET"
-				url="https://ethcall.org/eth2wei/:value"
+				path={
+					<span>
+						<span className="text-dark-brown font-bold">eth2wei</span>
+						<span className="text-white font-bold">/:value</span>
+					</span>
+				}
 				returns={JSON.stringify({ result: "string" })}
 			/>
 			<Section
 				method="GET"
-				url="https://ethcall.org/chains"
+				path="chains"
 				returns={`Array<${JSON.stringify({
 					chainId: "number",
 					chainName: "string",
@@ -92,9 +111,9 @@ export function Docs() {
 
 function Section({
 	method,
-	url,
+	path,
 	returns,
-}: { method: string; url: string; returns: string }) {
+}: { method: string; path: string | ReactNode; returns: string }) {
 	return (
 		<section className="relative p-6 md:p-8">
 			<RxCornerTopLeft className="group-hover:text-magenta md:w-10 md:h-10 w-8 h-8 absolute -top-[10px] -left-[10px] text-dark-brown" />
@@ -102,18 +121,23 @@ function Section({
 			<RxCornerBottomLeft className="group-hover:text-magenta md:w-10 md:h-10 w-8 h-8 absolute -bottom-[10px] -left-[10px] text-dark-brown" />
 			<RxCornerBottomRight className="group-hover:text-magenta md:w-10 md:h-10 w-8 h-8 absolute -bottom-[10px] -right-[10px] text-dark-brown" />
 			<div className="flex flex-col items-center md:items-start gap-2 break-words overflow-auto text-wrap">
-				<span className="bg-dark-brown text-magenta p-2 rounded-xl">
+				<span className="bg-dark-brown text-magenta p-2 rounded-xl leading-10 pt-2.5 px-3">
 					{method}
 				</span>
 				<div
 					style={{ overflowWrap: "anywhere" }}
-					className="overflow-auto text-wrap break-words"
+					className="overflow-auto text-wrap break-words flex items-center"
 				>
-					<span className="text-dark-brown">{url}</span>
+					<span className="text-dark-brown">https://ethcall.org/</span>
+					{typeof path === "string" ? (
+						<span className="text-dark-brown font-bold">{path}</span>
+					) : (
+						path
+					)}
 				</div>
 			</div>
 			<div className="mt-14 flex flex-col items-center md:items-start gap-4">
-				<span className="bg-dark-brown p-2 rounded-xl text-magenta italic">
+				<span className="bg-dark-brown p-2 rounded-xl text-magenta italic inline-flex leading-10 pt-2.5 px-3">
 					RETURNS
 				</span>
 				<div
