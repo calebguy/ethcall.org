@@ -67,7 +67,7 @@ export function Docs() {
 						<span className="text-white font-bold">/:value</span>
 					</span>
 				}
-				returns={JSON.stringify({ result: "string" })}
+				returns={"string"}
 			/>
 			<Section
 				method="GET"
@@ -77,7 +77,7 @@ export function Docs() {
 						<span className="text-white font-bold">/:value</span>
 					</span>
 				}
-				returns={JSON.stringify({ result: "string" })}
+				returns={"string"}
 			/>
 			<Section
 				method="GET"
