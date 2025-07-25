@@ -73,7 +73,7 @@ const api = app
 				400,
 			);
 		}
-		return c.json({ result: formattedValue });
+		return c.json(formattedValue);
 	})
 	.get("/eth2wei/:value", (c) => {
 		const { value } = c.req.param();
@@ -88,7 +88,7 @@ const api = app
 				400,
 			);
 		}
-		return c.json({ result: weiValue.toString() });
+		return c.json(weiValue.toString());
 	})
 	.get(
 		"/:chainId/:address/balance",
