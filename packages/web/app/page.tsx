@@ -41,14 +41,14 @@ export default function Home() {
 							path: string;
 							result: string | number | boolean;
 						}) => {
-							const [, chainId, address, fnSig, ...args] = req.path.split("/");
+							const [, , chainId, address, fnSig, ...args] = req.path.split("/");
 							const { signature, returnType } = splitFunctionSignature(fnSig);
 							return (
 								<a
 									key={req.id}
 									target="_blank"
 									rel="noopener noreferrer"
-									href={`/api${req.path}`}
+									href={req.path}
 									className="leading-8 md:leading-10 text-2xl md:text-4xl group relative w-full p-6 md:p-8 break-all hover:bg-magenta/15 rounded-[10px] border border-transparent hover:border-magenta transition-all duration-100"
 								>
 									<RxCornerTopLeft className="group-hover:text-magenta md:w-10 md:h-10 w-8 h-8 absolute -top-[10px] -left-[10px] text-dark-brown" />
