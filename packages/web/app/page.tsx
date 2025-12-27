@@ -41,8 +41,11 @@ export default function Home() {
 							path: string;
 							result: string | number | boolean;
 						}) => {
-							const [, , chainId, address, fnSig, ...args] = req.path.split("/");
-							const { signature, returnType } = splitFunctionSignature(fnSig);
+							const parts = req.path.split("/").filter(Boolean);
+							// Remove 'api' prefix if present
+							if (parts[0] === "api") parts.shift();
+							const [chainId, address, fnSig, ...args] = parts;
+							const { signature, returnType } = splitFunctionSignature(fnSig ?? "");
 							return (
 								<a
 									key={req.id}
